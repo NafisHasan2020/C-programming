@@ -1,0 +1,78 @@
+#include <stdio.h>
+
+int main() {
+    int n, i, sum = 0, first = 1;
+
+    printf("Enter a positive integer: ");
+    scanf("%d", &n);
+
+    printf("Sum expression: ");
+
+    for (i = 1; i <= n; ++i) {
+        if (i % 3 == 0 || i % 5 == 0) {
+            if (!first) {
+                printf(" + ");
+            }
+            printf("%d", i);
+            sum += i;
+            first = 0;
+        }
+    }
+
+    printf(" = %d\n", sum);
+    return 0;
+}
+In **C programming**, a **flag** is simply a **variable** (usually of type `int` or `bool`) that is used as a **signal** or **indicator** to track whether a condition has occurred or a state has been reached.
+
+---
+
+### 🔹 Common Uses of Flags:
+
+1. **To control flow inside loops or conditions**
+2. **To mark whether a specific event happened**
+3. **To avoid repeated actions (e.g., printing a plus sign)**
+4. **To toggle between states (like ON/OFF, TRUE/FALSE)**
+
+---
+
+### 🔹 Example:
+
+```c
+int found = 0; // flag variable
+
+for (int i = 0; i < 10; i++) {
+    if (arr[i] == 5) {
+        found = 1;
+        break;
+    }
+}
+
+if (found) {
+    printf("Number 5 was found in the array.\n");
+} else {
+    printf("Number 5 was not found.\n");
+}
+```
+
+* Here, `found` is a **flag**.
+* It is initially `0` (false).
+* If the number `5` is found, it's set to `1` (true), and the program reacts accordingly.
+
+---
+
+### 🔹 In Your Previous Code:
+
+```c
+int first = 1; // This is a flag
+
+if (!first) {
+    printf(" + ");
+}
+```
+
+* `first` starts as `1` to **skip the '+'** before the first number.
+* After printing the first number, it is set to `0` so future numbers get a `' + '` before them.
+
+---
+
+Flags are not a built-in feature; they're just a **programming pattern** that makes logic cleaner and easier to control.
