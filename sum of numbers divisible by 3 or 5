@@ -22,57 +22,124 @@ int main() {
     printf(" = %d\n", sum);
     return 0;
 }
-In **C programming**, a **flag** is simply a **variable** (usually of type `int` or `bool`) that is used as a **signal** or **indicator** to track whether a condition has occurred or a state has been reached.
+Certainly! Let's walk through your C program step-by-step and explain what it's doing logically:
 
 ---
 
-### 🔹 Common Uses of Flags:
+### 🔹 **Objective of the Program:**
 
-1. **To control flow inside loops or conditions**
-2. **To mark whether a specific event happened**
-3. **To avoid repeated actions (e.g., printing a plus sign)**
-4. **To toggle between states (like ON/OFF, TRUE/FALSE)**
+It takes a **positive integer `n`** from the user and calculates the **sum of all numbers from `1` to `n`** that are:
 
----
+* **divisible by 3 or 5**,
+* **but NOT divisible by 15**.
 
-### 🔹 Example:
+It also prints the **expression of the sum**, like:
 
-```c
-int found = 0; // flag variable
-
-for (int i = 0; i < 10; i++) {
-    if (arr[i] == 5) {
-        found = 1;
-        break;
-    }
-}
-
-if (found) {
-    printf("Number 5 was found in the array.\n");
-} else {
-    printf("Number 5 was not found.\n");
-}
+```
+3 + 5 + 6 + 9 + 10 + 12 = 45
 ```
 
-* Here, `found` is a **flag**.
-* It is initially `0` (false).
-* If the number `5` is found, it's set to `1` (true), and the program reacts accordingly.
+---
+
+### 🔹 **Code Breakdown:**
+
+```c
+int n, i, sum = 0, first = 1;
+```
+
+* `n`: the user input (upper limit).
+* `i`: loop counter.
+* `sum`: stores the final sum.
+* `first`: a flag to help format the `+` sign properly.
 
 ---
 
-### 🔹 In Your Previous Code:
+### 🔹 **Input Section:**
 
 ```c
-int first = 1; // This is a flag
+printf("Enter a positive integer: ");
+scanf("%d", &n);
+```
 
+Prompts the user to enter a number, which is stored in `n`.
+
+---
+
+### 🔹 **Output Heading:**
+
+```c
+printf("Sum expression: ");
+```
+
+Just a label for the expression that will be printed next.
+
+---
+
+### 🔹 **Main Loop:**
+
+```c
+for (i = 1; i <= n; ++i) {
+```
+
+Loops from `1` to `n`.
+
+#### ✅ Inside the loop:
+
+```c
+if ((i % 3 == 0 || i % 5 == 0) && !(i % 15 == 0)) {
+```
+
+* `(i % 3 == 0 || i % 5 == 0)` checks if `i` is divisible by **3 or 5**.
+* `!(i % 15 == 0)` ensures it is **not divisible by 15**.
+
+This filters numbers divisible by **only 3 or only 5**, but **not both** (since `15` is LCM of 3 and 5).
+
+#### ➕ Handling the `+` symbol:
+
+```c
 if (!first) {
     printf(" + ");
 }
 ```
 
-* `first` starts as `1` to **skip the '+'** before the first number.
-* After printing the first number, it is set to `0` so future numbers get a `' + '` before them.
+* `first` is initially `1` (true).
+* So this **skips the plus sign** before the first number.
+* After printing the first number, `first` is set to `0`, and `+` will be printed before each next number.
+
+#### 📤 Print and Add:
+
+```c
+printf("%d", i);
+sum += i;
+first = 0;
+```
+
+* Prints the current number in the sum expression.
+* Adds it to the `sum`.
+* Sets `first = 0` so the next number gets a `+`.
 
 ---
 
-Flags are not a built-in feature; they're just a **programming pattern** that makes logic cleaner and easier to control.
+### 🔚 **After the Loop:**
+
+```c
+printf(" = %d\n", sum);
+```
+
+Prints the final result after the sum expression.
+
+---
+
+### 🔹 **Example:**
+
+**Input:** `n = 20`
+**Output:**
+
+```
+Sum expression: 3 + 5 + 6 + 9 + 10 + 12 + 18 + 20 = 83
+```
+
+* Included: 3, 5, 6, 9, 10, 12, 18, 20
+* Skipped: 15 (divisible by both 3 and 5)
+
+---
